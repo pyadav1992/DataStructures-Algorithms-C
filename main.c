@@ -41,7 +41,21 @@
 /* ==================================================================== */
 
 /* #define and enum statements go here ---------------------------------*/
-
+typedef enum
+{
+  MAIN_MENU = 0, // MAIN MENU
+  SORTING,       // SORTING sub menu        
+  BUBBLE_SORT,
+  SELECTION_SORT,  
+  SEARCHING,     // SEARCHING sub menu
+  BINARY_SEARCH,
+  LINEAR_SEARCH,  
+  STACK_ARR,
+  STACK_LL,
+  QUEUE_ARR,
+  QUEUE_LL,
+  MENU_EXIT
+} AppMenu_t;
 
 /* ==================================================================== */
 /* ============================== data ================================ */
@@ -70,14 +84,6 @@
 // Sorting test array
 int unsorted[] = {100, 5, 90, 20, 65, 1, 2, 3, 5, 1, 7, 23};
 
-#define MENU_MAIN        1
-#define MENU_1           2
-#define MENU_1_SUBMENU_1 3
-#define MENU_2           4
-#define MENU_2_SUBMENU_1 5
-#define MENU_2_SUBMENU_2 6
-#define MENU_EXIT        7
-
 /* ==================================================================== */
 /* ==================== function prototypes =========================== */
 /* ==================================================================== */
@@ -85,10 +91,10 @@ int unsorted[] = {100, 5, 90, 20, 65, 1, 2, 3, 5, 1, 7, 23};
 /* Function prototypes for extern functions go here --------------------*/
 
 /* Function prototypes for local (static) functions go here ------------*/
-int displayMenu(int);
-void do_menu_1_submenu_1_function();
-void do_menu_2_submenu_1_function();
-void do_menu_2_submenu_2_function();
+static int display_menu(int);
+static void do_menu_1_submenu_1_function();
+static void do_menu_2_submenu_1_function();
+static void do_menu_2_submenu_2_function();
 
 /* ==================================================================== */
 /* ==================== MAIN ========================================== */
@@ -126,111 +132,64 @@ void do_menu_2_submenu_2_function();
 
 int main()
 {
-	int menuOption = MENU_MAIN;
-	do {
-		menuOption = displayMenu(menuOption);
-		switch(menuOption) {
-		case MENU_1_SUBMENU_1:
-			do_menu_1_submenu_1_function();
-			menuOption = MENU_1;
-			break;
-		case MENU_2_SUBMENU_1:
-			do_menu_2_submenu_1_function();
-			menuOption = MENU_2;
-			break;
-		case MENU_2_SUBMENU_2:
-			do_menu_2_submenu_2_function();
-			menuOption = MENU_2;
-			break;
-		}
-	} while (menuOption != MENU_EXIT);
+	AppMenu_t menu_option = MAIN_MENU;
+	do 
+  {
+		switch(menu_option) 
+    {
+      case MAIN_MENU:
+      {
+        menu_option = display_menu(menu_option);
+        break;
+      }
+
+      case SORTING:
+      {
+        menu_option = SORTING;
+        break;
+      }
+
+      case SEARCHING:
+      {
+        menu_option = SEARCHING;
+        break;
+      }
+
+      case STACK_ARR:
+      {
+        menu_option = STACK_ARR;
+        break;
+      }
+
+      case STACK_LL:
+      {
+        menu_option = STACK_LL;
+        break;
+      }
+
+      case QUEUE_ARR:
+      {
+        menu_option = QUEUE_ARR;
+        break;
+      }
+
+      case QUEUE_LL:
+      {
+        menu_option = QUEUE_LL;
+        break;
+      }
+
+      default:
+      {
+        return MENU_EXIT;
+      }
+    }
+	} while (menu_option != MENU_EXIT);
 
 	return 0;
 }
 
-int displayMenu(int startMenu)
-{
-	int userChoice;
-	userChoice = -1;
-	char carRet;
-	switch(startMenu) {
-	case MENU_MAIN:
-	case MENU_EXIT:
-	//case MENU_1_EXIT:
-	//case MENU_2_EXIT:
-		// display main menu
-		printf("-- Main Menu --\n");
-		printf( "1. Menu - 1\n2. Menu - 2\n3. Exit\n\n" );
-		while(1) {
-			userChoice = -1;
-		   scanf( " %d", &userChoice );
 
-		   if((userChoice<=3)&&(userChoice>=1))
-				   break;
-		}
-		// process user choice
-		switch(userChoice) {
-			case 1:
-			{
-				return displayMenu(MENU_1);
-			}
-			case 2:
-			{
-				return displayMenu(MENU_2);
-			}
-			case 3:
-			{
-				return MENU_EXIT;
-			}
-		}
-		// we should never come to this point
-		assert(0);
-	case MENU_1:
-		// display submenu 1
-		printf( "\t-- Menu 1 --\n");
-		printf( "\t1. Menu 1 : SubMenu - 1\n\t2. Exit\n\n" );
-		while( userChoice<1 || userChoice>2 ) {
-		   printf( "\tPlease choose an option (1-2): " );
-		   scanf( "%d", &userChoice );
-		}
-		// process user choice
-		switch(userChoice) {
-		case 1: return MENU_1_SUBMENU_1;
-		case 2: return MENU_MAIN;
-		}
-		// we should never come to this point
-		assert(0);
-	case MENU_2:
-		// display submenu 2
-		printf( "\t-- Menu 2 --\n");
-		printf( "\t1. Menu 2 : SubMenu - 1\n\t2. Menu 2 : SubMenu - 2\n\t3. Exit\n\n" );
-		while( userChoice<1 || userChoice>3 ) {
-		   printf( "\tPlease choose an option (1-3): " );
-		   scanf( "%d", &userChoice );
-		}
-		// process user choice
-		switch(userChoice) {
-		case 1: return MENU_2_SUBMENU_1;
-		case 2: return MENU_2_SUBMENU_2;
-		case 3: return MENU_MAIN;
-		}
-		// we should never come to this point
-		assert(0);
-	}
-
-	return 0;
-}
-
-void do_menu_1_submenu_1_function()
-{
-}
-void do_menu_2_submenu_1_function()
-{
-	printf("\n\t... executing routine 1 from submenu 2 ...\n\n");
-}
-void do_menu_2_submenu_2_function()
-{
-}
 
 /* ==================================================================== */
 /* ==================== function definitions ========================== */
@@ -239,6 +198,144 @@ void do_menu_2_submenu_2_function()
 /* Function definition for local (static) functions go here ------------*/
 
 /* Function definition for public functions go here --------------------*/
+int display_menu(int StartMenu)
+{
+	int user_choice = -1;
+	char CarRet;
+	switch(StartMenu) 
+  {
+	  case MAIN_MENU:
+	  case MENU_EXIT:
+		  // display main menu
+		  printf("============================\n");
+      printf("MAIN MENU\n");
+      printf("============================\n");
+		  printf( "1. Sorting\n2. Searching\n3. Stack(Array)\n4. Stack(Linked List)\n5. Queue(Array)\n6. Queue(Linked List)\n7. Exit\n" );
+      printf("============================\n");
+		  while(1) 
+      {
+			  user_choice = -1;
+        printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
+		    scanf( " %d", &user_choice );
+
+		    if((user_choice>=SORTING) && (user_choice<=MENU_EXIT))
+				   break;
+		  }
+
+		  // process user choice
+		  switch(user_choice) 
+      {
+			  case SORTING:
+			  {
+				  return display_menu(SORTING);
+			  }
+
+			  case SEARCHING:
+			  {
+				  return display_menu(SEARCHING);
+			  }
+
+			  case STACK_LL:
+			  {
+				  return STACK_LL;
+			  }
+
+        default:
+        {
+          return MENU_EXIT;
+        }
+		  }
+
+		  // we should never come to this point
+		  assert(0);
+
+	  case SORTING:
+		  // display submenu 1
+		  printf( "SORTING\n");
+		  printf( "1. Bubble sort\n2. Selection sort\n3. Exit\n\n" );
+		  while(1) 
+      {
+			  user_choice = -1;
+        printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
+		    scanf( " %d", &user_choice );
+
+		    if((user_choice>=BUBBLE_SORT) && (user_choice<=MENU_EXIT))
+				   break;
+		  }
+		  // process user choice
+		  switch(user_choice)
+      {
+		    case BUBBLE_SORT: 
+        {
+          return BUBBLE_SORT;
+        }
+
+		    case SELECTION_SORT: 
+        {
+          return SELECTION_SORT;
+        }
+
+        default:
+        {
+          return MAIN_MENU;
+        }
+		  }
+
+		  // we should never come to this point
+		  assert(0);
+
+	    case SEARCHING:
+		    // display submenu 2
+	  	  printf( "SEARCHING\n");
+	    	printf( "1. Bianry search\n2. linear search\n3. Exit\n" );
+		  while(1) 
+      {
+			  user_choice = -1;
+        printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
+		    scanf( " %d", &user_choice );
+
+		    if((user_choice>=BINARY_SEARCH) && (user_choice<=MENU_EXIT))
+				   break;
+		  }
+
+		    // process user choice
+        switch(user_choice) 
+        {
+          case BINARY_SEARCH: 
+          {
+            return BINARY_SEARCH;
+          }
+
+          case LINEAR_SEARCH: 
+          {
+            return LINEAR_SEARCH;
+          }
+
+          default:
+          {
+            return MAIN_MENU;
+          }
+        }
+
+		    // we should never come to this point
+		    assert(0);
+	}
+
+	return 0;
+}
+
+void do_menu_1_submenu_1_function()
+{
+
+}
+void do_menu_2_submenu_1_function()
+{
+	printf("\n\t... executing routine 1 from submenu 2 ...\n\n");
+}
+void do_menu_2_submenu_2_function()
+{
+
+}
 
 /* @prog __ApplicationName ***********************************************
 **
