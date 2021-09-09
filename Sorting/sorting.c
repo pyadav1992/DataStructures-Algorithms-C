@@ -26,8 +26,7 @@
 /* ==================================================================== */
 
 /* Include system and local header files goes here ---------------------*/
-#include<stdio.h>
-
+#include "/home/runner/DataStructuresAlgorithms/main.h"
 #include "sorting.h"
 
 /* ==================================================================== */
@@ -95,6 +94,46 @@ void swap(int *pA, int *pB)
 }
 
 /* Function definition for public functions go here --------------------*/
+AppMenu_t sorting_sub_menu(int user_input)
+{
+  // display submenu 1
+  printf( "SORTING\n");
+  printf( "1. Bubble sort\n2. Selection sort\n3. Exit\n\n" );
+  while(1) 
+  {
+    user_input = -1;
+    printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
+    scanf( " %d", &user_input );
+
+    if((user_input>=BUBBLE_SORT) && (user_input<=MENU_EXIT))
+        break;
+  }
+
+  // Process the user input
+  switch(user_input)
+  {
+    case BUBBLE_SORT: 
+    {
+      return BUBBLE_SORT;
+    }
+
+    case SELECTION_SORT: 
+    {
+      return SELECTION_SORT;
+    }
+
+    default:
+    {
+      return MAIN_MENU;
+    }
+  }
+
+  // we should never come to this point
+  assert(0);
+
+  return -1;
+}
+
 void brute_selection_sort(int arr[], int start, int end, bool increasing)
 {
 	int i, j;
@@ -187,8 +226,8 @@ void brute_bubble_sort(int arr[], int start, int end, bool increasing)
 		printf("%d, ",arr[i]);
 	}
 	printf("\r\n");
-
 }
+
 /* @prog __ApplicationName ***********************************************
 **
 ** __ShortDescription__

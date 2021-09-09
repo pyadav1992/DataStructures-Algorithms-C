@@ -26,12 +26,7 @@
 /* ==================================================================== */
 
 /* Include system and local header files goes here ---------------------*/
-
-#include <stdio.h>
-#include <assert.h>
-#include <time.h>       // including for clock_t, clock(), CLOCKS_PER_SEC
-// #include <unistd.h>     // including for sleep()
-
+#include "main.h"
 #include "BigO/finding_nemo.h"  // O(n) example
 #include "BigO/log_all_pairs.h" // O(n^2) example
 #include "Sorting/sorting.h"    // Sorting algorithms
@@ -41,21 +36,7 @@
 /* ==================================================================== */
 
 /* #define and enum statements go here ---------------------------------*/
-typedef enum
-{
-  MAIN_MENU = 0, // MAIN MENU
-  SORTING,       // SORTING sub menu        
-  BUBBLE_SORT,
-  SELECTION_SORT,  
-  SEARCHING,     // SEARCHING sub menu
-  BINARY_SEARCH,
-  LINEAR_SEARCH,  
-  STACK_ARR,
-  STACK_LL,
-  QUEUE_ARR,
-  QUEUE_LL,
-  MENU_EXIT
-} AppMenu_t;
+
 
 /* ==================================================================== */
 /* ============================== data ================================ */
@@ -250,53 +231,23 @@ int display_menu(int StartMenu)
 		  assert(0);
 
 	  case SORTING:
-		  // display submenu 1
-		  printf( "SORTING\n");
-		  printf( "1. Bubble sort\n2. Selection sort\n3. Exit\n\n" );
-		  while(1) 
-      {
-			  user_choice = -1;
-        printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
-		    scanf( " %d", &user_choice );
-
-		    if((user_choice>=BUBBLE_SORT) && (user_choice<=MENU_EXIT))
-				   break;
-		  }
-		  // process user choice
-		  switch(user_choice)
-      {
-		    case BUBBLE_SORT: 
-        {
-          return BUBBLE_SORT;
-        }
-
-		    case SELECTION_SORT: 
-        {
-          return SELECTION_SORT;
-        }
-
-        default:
-        {
-          return MAIN_MENU;
-        }
-		  }
-
-		  // we should never come to this point
-		  assert(0);
-
+    {
+      return sorting_sub_menu(user_choice);
+    }
+    
 	    case SEARCHING:
 		    // display submenu 2
 	  	  printf( "SEARCHING\n");
 	    	printf( "1. Bianry search\n2. linear search\n3. Exit\n" );
-		  while(1) 
-      {
-			  user_choice = -1;
-        printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
-		    scanf( " %d", &user_choice );
+        while(1) 
+        {
+          user_choice = -1;
+          printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
+          scanf( " %d", &user_choice );
 
-		    if((user_choice>=BINARY_SEARCH) && (user_choice<=MENU_EXIT))
-				   break;
-		  }
+          if((user_choice>=BINARY_SEARCH) && (user_choice<=MENU_EXIT))
+            break;
+        }
 
 		    // process user choice
         switch(user_choice) 
