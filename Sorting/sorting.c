@@ -48,7 +48,8 @@
 /* ==================================================================== */
 
 /* Global variables definitions go here --------------------------------*/
-
+// Sorting test array
+int unsorted[] = {100, 5, 90, 20, 65, 1, 2, 3, 5, 1, 7, 23};
 
 /* ==================================================================== */
 /* ======================== local variables =========================== */
@@ -98,33 +99,47 @@ AppMenu_t sorting_sub_menu(int user_input)
 {
   // display submenu 1
   printf( "SORTING\n");
-  printf( "1. Bubble sort\n2. Selection sort\n3. Exit\n\n" );
+  printf( "%d. Bubble sort\n%d. Selection sort\n%d. Go back\n%d. Exit\n\n", BUBBLE_SORT, SELECTION_SORT, MENU_BACK, MENU_EXIT);
   while(1) 
   {
     user_input = -1;
-    printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
+    printf( "Please choose an option (%d-%d): ", BUBBLE_SORT, MENU_EXIT);
     scanf( " %d", &user_input );
 
     if((user_input>=BUBBLE_SORT) && (user_input<=MENU_EXIT))
         break;
   }
-
+  
   // Process the user input
   switch(user_input)
   {
     case BUBBLE_SORT: 
     {
-      return BUBBLE_SORT;
+      brute_bubble_sort(unsorted, 3, 9, false);
+      return SORTING;
     }
 
     case SELECTION_SORT: 
     {
-      return SELECTION_SORT;
+      brute_selection_sort(unsorted, 3, 9, false);
+      return SORTING;
+    }
+
+    case MENU_BACK: 
+    {
+      return MAIN_MENU; 
+    }
+
+    case MENU_EXIT: 
+    {
+      printf("Program exit.\r\n");
+      return MENU_EXIT;
     }
 
     default:
     {
-      return MAIN_MENU;
+      printf("Command not supported. \r\n");
+      return SORTING;
     }
   }
 

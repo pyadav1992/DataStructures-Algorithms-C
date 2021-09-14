@@ -62,8 +62,7 @@
 // char *test_char_str[5] = {"abc", "bc", "   ", "cdef", "Nemo"};
 // O(n^2) - log_all_pairs test case
 // char *test_char_array[5] = {"a", "b", "c", "d", "e"};
-// Sorting test array
-int unsorted[] = {100, 5, 90, 20, 65, 1, 2, 3, 5, 1, 7, 23};
+
 
 /* ==================================================================== */
 /* ==================== function prototypes =========================== */
@@ -162,6 +161,7 @@ int main()
 
       default:
       {
+        printf("Command not supported.\r\n");
         return MENU_EXIT;
       }
     }
@@ -182,110 +182,102 @@ int main()
 int display_menu(int StartMenu)
 {
 	int user_choice = -1;
-	char CarRet;
-	switch(StartMenu) 
+
+  // display main menu
+  printf("============================\n");
+  printf("MAIN MENU\n");
+  printf("============================\n");
+  printf( "%d. Sorting\n%d. Searching\n%d. Stack(Array)\n%d. Stack(Linked List)\n%d. Queue(Array)\n%d. Queue(Linked List)\n%d. Exit\n",    SORTING, SEARCHING, STACK_ARR, STACK_LL, QUEUE_ARR, QUEUE_LL, MENU_EXIT);
+  printf("============================\n");
+  while(1) 
   {
-	  case MAIN_MENU:
-	  case MENU_EXIT:
-		  // display main menu
-		  printf("============================\n");
-      printf("MAIN MENU\n");
-      printf("============================\n");
-		  printf( "1. Sorting\n2. Searching\n3. Stack(Array)\n4. Stack(Linked List)\n5. Queue(Array)\n6. Queue(Linked List)\n7. Exit\n" );
-      printf("============================\n");
-		  while(1) 
-      {
-			  user_choice = -1;
-        printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
-		    scanf( " %d", &user_choice );
+    user_choice = -1;
+    printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
+    scanf( " %d", &user_choice );
 
-		    if((user_choice>=SORTING) && (user_choice<=MENU_EXIT))
-				   break;
-		  }
+    if((user_choice>=SORTING) && (user_choice<=MENU_EXIT))
+        break;
+  }
 
-		  // process user choice
-		  switch(user_choice) 
-      {
-			  case SORTING:
-			  {
-				  return display_menu(SORTING);
-			  }
+  // process user choice
+  switch(user_choice) 
+  {
+    case SORTING:
+    {
+      user_choice = SORTING;
+      break;
+    }
 
-			  case SEARCHING:
-			  {
-				  return display_menu(SEARCHING);
-			  }
+    case SEARCHING:
+    {
+      user_choice = SEARCHING;
+      break;
+    }
 
-			  case STACK_LL:
-			  {
-				  return STACK_LL;
-			  }
+    case STACK_LL:
+    {
+      user_choice = STACK_LL;
 
-        default:
-        {
-          return MENU_EXIT;
-        }
-		  }
+      break;
+    }
 
-		  // we should never come to this point
-		  assert(0);
+    case MENU_EXIT:
+    {
+      user_choice = MENU_EXIT;
+      break;
+    }
+
+    default:
+    {
+      printf("Command not supported.\r\n");
+      user_choice = MAIN_MENU;
+      break;
+    }
+  }
+
 
 	  case SORTING:
     {
-      return sorting_sub_menu(user_choice);
+      user_choice = sorting_sub_menu(user_choice);
+      break;
     }
     
-	    case SEARCHING:
-		    // display submenu 2
-	  	  printf( "SEARCHING\n");
-	    	printf( "1. Bianry search\n2. linear search\n3. Exit\n" );
-        while(1) 
-        {
-          user_choice = -1;
-          printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
-          scanf( " %d", &user_choice );
+    case SEARCHING:
+      // display submenu 2
+      printf( "SEARCHING\n");
+      printf( "1. Bianry search\n2. linear search\n3. Exit\n" );
+      while(1) 
+      {
+        user_choice = -1;
+        printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
+        scanf( " %d", &user_choice );
 
-          if((user_choice>=BINARY_SEARCH) && (user_choice<=MENU_EXIT))
-            break;
+        if((user_choice>=BINARY_SEARCH) && (user_choice<=MENU_EXIT))
+          break;
+      }
+
+      // process user choice
+      switch(user_choice) 
+      {
+        case BINARY_SEARCH: 
+        {
+          return BINARY_SEARCH;
         }
 
-		    // process user choice
-        switch(user_choice) 
+        case LINEAR_SEARCH: 
         {
-          case BINARY_SEARCH: 
-          {
-            return BINARY_SEARCH;
-          }
-
-          case LINEAR_SEARCH: 
-          {
-            return LINEAR_SEARCH;
-          }
-
-          default:
-          {
-            return MAIN_MENU;
-          }
+          return LINEAR_SEARCH;
         }
 
-		    // we should never come to this point
-		    assert(0);
+        default:
+        {
+          return MAIN_MENU;
+        }
+      }
+      break;
 	}
 
-	return 0;
-}
-
-void do_menu_1_submenu_1_function()
-{
-
-}
-void do_menu_2_submenu_1_function()
-{
-	printf("\n\t... executing routine 1 from submenu 2 ...\n\n");
-}
-void do_menu_2_submenu_2_function()
-{
-
+	return user_choice;
 }
 
 /* @prog __ApplicationName ***********************************************

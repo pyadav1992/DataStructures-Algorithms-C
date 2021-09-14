@@ -58,6 +58,7 @@ typedef enum
   STACK_LL,
   QUEUE_ARR,
   QUEUE_LL,
+  MENU_BACK,
   MENU_EXIT
 } AppMenu_t;
 
