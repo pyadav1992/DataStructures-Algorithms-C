@@ -48,10 +48,12 @@ extern "C"
 typedef enum
 {
   MAIN_MENU = 0, // MAIN MENU
-  SORTING,       // SORTING sub menu        
+  SORTING, 
+  // SORTING sub menu              
   BUBBLE_SORT,
   SELECTION_SORT,  
-  SEARCHING,     // SEARCHING sub menu
+  SEARCHING,
+  // SEARCHING sub menu     
   BINARY_SEARCH,
   LINEAR_SEARCH,  
   STACK_ARR,

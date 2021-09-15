@@ -63,7 +63,7 @@ extern "C"
 /* ==================================================================== */
 
 /* Function prototypes for public functions go here --------------------*/
-AppMenu_t sorting_sub_menu(int user_input);
+AppMenu_t sorting_sub_menu(void);
 void brute_selection_sort(int arr[], int start, int end, bool increasing);
 void brute_bubble_sort(int arr[], int start, int end, bool increasing);
 

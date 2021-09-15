@@ -71,10 +71,7 @@
 /* Function prototypes for extern functions go here --------------------*/
 
 /* Function prototypes for local (static) functions go here ------------*/
-static int display_menu(int);
-static void do_menu_1_submenu_1_function();
-static void do_menu_2_submenu_1_function();
-static void do_menu_2_submenu_2_function();
+static int display_menu(void);
 
 /* ==================================================================== */
 /* ==================== MAIN ========================================== */
@@ -119,13 +116,13 @@ int main()
     {
       case MAIN_MENU:
       {
-        menu_option = display_menu(menu_option);
+        menu_option = display_menu();
         break;
       }
 
       case SORTING:
       {
-        menu_option = SORTING;
+        menu_option = sorting_sub_menu();
         break;
       }
 
@@ -171,7 +168,6 @@ int main()
 }
 
 
-
 /* ==================================================================== */
 /* ==================== function definitions ========================== */
 /* ==================================================================== */
@@ -179,11 +175,12 @@ int main()
 /* Function definition for local (static) functions go here ------------*/
 
 /* Function definition for public functions go here --------------------*/
-int display_menu(int StartMenu)
+int display_menu(void)
 {
-	int user_choice = -1;
+	int user_input = -1;
 
   // display main menu
+  printf("\n");
   printf("============================\n");
   printf("MAIN MENU\n");
   printf("============================\n");
@@ -191,73 +188,67 @@ int display_menu(int StartMenu)
   printf("============================\n");
   while(1) 
   {
-    user_choice = -1;
+    user_input = -1;
     printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
-    scanf( " %d", &user_choice );
+    scanf( " %d", &user_input );
 
-    if((user_choice>=SORTING) && (user_choice<=MENU_EXIT))
+    if((user_input>=SORTING) && (user_input<=MENU_EXIT))
         break;
   }
 
   // process user choice
-  switch(user_choice) 
+  switch(user_input) 
   {
     case SORTING:
     {
-      user_choice = SORTING;
+      user_input = SORTING;
       break;
     }
 
     case SEARCHING:
     {
-      user_choice = SEARCHING;
+      user_input = SEARCHING;
       break;
     }
 
     case STACK_LL:
     {
-      user_choice = STACK_LL;
+      user_input = STACK_LL;
 
       break;
     }
 
     case MENU_EXIT:
     {
-      user_choice = MENU_EXIT;
+      user_input = MENU_EXIT;
       break;
     }
 
     default:
     {
       printf("Command not supported.\r\n");
-      user_choice = MAIN_MENU;
+      user_input = MAIN_MENU;
       break;
     }
   }
 
-
-	  case SORTING:
-    {
-      user_choice = sorting_sub_menu(user_choice);
-      break;
-    }
-    
+/*    
     case SEARCHING:
       // display submenu 2
       printf( "SEARCHING\n");
       printf( "1. Bianry search\n2. linear search\n3. Exit\n" );
       while(1) 
       {
-        user_choice = -1;
+        user_input = -1;
         printf( "Please choose an option (%d-%d): ", SORTING, MENU_EXIT);
-        scanf( " %d", &user_choice );
+        scanf( " %d", &user_input );
 
-        if((user_choice>=BINARY_SEARCH) && (user_choice<=MENU_EXIT))
+        if((user_input>=BINARY_SEARCH) && (user_input<=MENU_EXIT))
           break;
       }
 
       // process user choice
-      switch(user_choice) 
+      switch(user_input) 
       {
         case BINARY_SEARCH: 
         {
@@ -276,8 +267,8 @@ int display_menu(int StartMenu)
       }
       break;
 	}
-
-	return user_choice;
+*/
+	return user_input;
 }
 
 /* @prog __ApplicationName ***********************************************

@@ -26,6 +26,8 @@
 /* ==================================================================== */
 
 /* Include system and local header files goes here ---------------------*/
+#include <string.h>
+
 #include "/home/runner/DataStructuresAlgorithms/main.h"
 #include "sorting.h"
 
@@ -95,10 +97,16 @@ void swap(int *pA, int *pB)
 }
 
 /* Function definition for public functions go here --------------------*/
-AppMenu_t sorting_sub_menu(int user_input)
+AppMenu_t sorting_sub_menu(void)
 {
+  int user_input = -1;
+  int temp[12];
+  
   // display submenu 1
+  printf("\n");
+  printf("============================\n");
   printf( "SORTING\n");
+  printf("============================\n");
   printf( "%d. Bubble sort\n%d. Selection sort\n%d. Go back\n%d. Exit\n\n", BUBBLE_SORT, SELECTION_SORT, MENU_BACK, MENU_EXIT);
   while(1) 
   {
@@ -115,38 +123,43 @@ AppMenu_t sorting_sub_menu(int user_input)
   {
     case BUBBLE_SORT: 
     {
-      brute_bubble_sort(unsorted, 3, 9, false);
-      return SORTING;
+      printf("Bubble sort example:\r\n");
+      memcpy(temp, unsorted, 12*sizeof(int));
+      brute_bubble_sort(temp, 3, 9, false);
+      user_input = SORTING;
+      break;
     }
 
     case SELECTION_SORT: 
     {
+      printf("Selection sort example:\r\n");
+      memcpy(temp, unsorted, 12*sizeof(int));
       brute_selection_sort(unsorted, 3, 9, false);
-      return SORTING;
+      user_input = SORTING;
+      break;
     }
 
     case MENU_BACK: 
     {
-      return MAIN_MENU; 
+      user_input = MAIN_MENU; 
+      break;
     }
 
     case MENU_EXIT: 
     {
       printf("Program exit.\r\n");
-      return MENU_EXIT;
+      user_input = MENU_EXIT;
+      break;
     }
 
     default:
     {
       printf("Command not supported. \r\n");
-      return SORTING;
+      user_input = SORTING;
+      break;
     }
   }
-
-  // we should never come to this point
-  assert(0);
-
-  return -1;
+  return user_input;
 }
 
 void brute_selection_sort(int arr[], int start, int end, bool increasing)
